@@ -82,6 +82,9 @@ function pingServer (address) {
  * Reads the arp table.
  */
 function arpAll () {
+  if(process.platform.includes('linux')){
+    return cp.exec('/usr/sbin/arp -a', options).then(parseAll) 
+  }
   return cp.exec('arp -a', options).then(parseAll)
 }
 
